@@ -1,11 +1,12 @@
 name: shelf_exception_response
 version: 0.1.0
-description: Shelf middleware that provides the abillity to simply throw an HttpException that gets converted to an appropriate response code and a formatted response body dependent on clients accept header.
+description: Shelf middleware that provides the abillity to simply throw an HttpException that gets converted to an appropriate response code and a formatted response body dependent on the clients accept header.
 homepage: https://github.com/octobyte/shelf_exception_response
 author: Thomas Profelt <tom@octobyte.at>
 
 dependencies:
-  shelf: any
+  shelf: ">=0.5.0+1 <0.6.0"
+  tentacle_response_formatter: ">=0.1.0 <0.2.0"
 
 dev_dependencies:
   unittest: any
