@@ -70,7 +70,12 @@ void main() {
 ### Adding additional response data for the body ###
 Every HttpException can take a data parameter that accepts a `Map<String, dynamic> data` in the constructor that
 provides you with the ability to add custom data to the generated response. The fields status and message are always
-added to the response data but can be overridden by data.
+added to the response data but can be overridden by data. 
+
+Please keep in mind that responses of type "text/plain" do currently not output any data other than status and message 
+(how should I format them anyhow ?). To add support for your own output format or change an existing one look at 
+[Tentacle Response Formatter](http://pub.dartlang.org/packages/tentacle_response_formatter) under the section 
+"Add your own response formatter".
 
 ```dart
 // adding custom data to response
