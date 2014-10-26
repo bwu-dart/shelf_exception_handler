@@ -58,7 +58,7 @@ class PaymentRequiredException extends HttpException {
 
 // 403 Forbidden
 class ForbiddenException extends HttpException {
-  const PaymentRequiredException([Map<String, dynamic> data,
+  const ForbiddenException([Map<String, dynamic> data,
                                  String detail = ""])
   : super(HttpStatus.FORBIDDEN, "Forbidden: $detail", data);
 }
