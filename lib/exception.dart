@@ -13,7 +13,8 @@ class HttpException implements Exception {
   final String message;
   final Map<String, dynamic> data;
 
-  const HttpException([this.status = HttpStatus.INTERNAL_SERVER_ERROR, this.message = "Internal Server Error", this.data]);
+  const HttpException([this.status = HttpStatus.INTERNAL_SERVER_ERROR,
+      this.message = "Internal Server Error", this.data]);
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic>result = {
@@ -36,112 +37,107 @@ class HttpException implements Exception {
 
 // 400 Bad Request
 class BadRequestException extends HttpException {
-  final int status = HttpStatus.BAD_REQUEST;
-  final String message = "Bad Request";
-  final Map<String, dynamic> data;
-  const BadRequestException([this.data]);
+  const BadRequestException([Map<String, dynamic> data,
+                             String detail = ""])
+      : super(HttpStatus.BAD_REQUEST, _toMessage("Bad Request", detail), data);
 }
 
 // 401 Unauthorized
 class UnauthorizedException extends HttpException {
-  final int status = HttpStatus.UNAUTHORIZED;
-  final String message = "Unauthorized";
-  final Map<String, dynamic> data;
-  const UnauthorizedException([this.data]);
+  const UnauthorizedException([Map<String, dynamic> data,
+                            String detail = ""])
+      : super(HttpStatus.UNAUTHORIZED, _toMessage("Unauthorized", detail), data);
 }
 
 // 402 Payment Required
 class PaymentRequiredException extends HttpException {
-  final int status = HttpStatus.PAYMENT_REQUIRED;
-  final String message = "Payment Required";
-  final Map<String, dynamic> data;
-  const PaymentRequiredException([this.data]);
+  const PaymentRequiredException([Map<String, dynamic> data,
+                              String detail = ""])
+  : super(HttpStatus.PAYMENT_REQUIRED, _toMessage("Payment Required", detail), data);
 }
 
 // 403 Forbidden
 class ForbiddenException extends HttpException {
-  final int status = HttpStatus.FORBIDDEN;
-  final String message = "Forbidden";
-  final Map<String, dynamic> data;
-  const ForbiddenException([this.data]);
+  const ForbiddenException([Map<String, dynamic> data,
+                                 String detail = ""])
+  : super(HttpStatus.FORBIDDEN, _toMessage("Forbidden", detail), data);
 }
 
 // 404 Not Found
 class NotFoundException extends HttpException {
-  final int status = HttpStatus.NOT_FOUND;
-  final String message = "Not Found";
-  final Map<String, dynamic> data;
-  const NotFoundException([this.data]);
+  const NotFoundException([Map<String, dynamic> data,
+                                 String detail = ""])
+  : super(HttpStatus.NOT_FOUND, _toMessage("Not Found", detail), data);
 }
 
 // 405 Method Not Allowed
 class MethodNotAllowed extends HttpException {
-  final int status = HttpStatus.METHOD_NOT_ALLOWED;
-  final String message = "Method Not Allowed";
-  final Map<String, dynamic> data;
-  const MethodNotAllowed([this.data]);
+  const MethodNotAllowed([Map<String, dynamic> data,
+                          String detail = ""])
+  : super(HttpStatus.METHOD_NOT_ALLOWED, _toMessage("Method Not Allowed", detail), data);
 }
 
 // 406 Not Acceptable
 class NotAcceptableException extends HttpException {
-  final int status = HttpStatus.NOT_ACCEPTABLE;
-  final String message = "Not Acceptable";
-  final Map<String, dynamic> data;
-  const NotAcceptableException([this.data]);
+  const NotAcceptableException([Map<String, dynamic> data,
+                         String detail = ""])
+  : super(HttpStatus.NOT_ACCEPTABLE, _toMessage("Not Acceptable", detail), data);
 }
 
 // 409 Conflict
 class ConflictException extends HttpException {
-  final int status = HttpStatus.CONFLICT;
-  final String message = "Conflict";
-  final Map<String, dynamic> data;
-  const ConflictException([this.data]);
+  const ConflictException([Map<String, dynamic> data,
+                               String detail = ""])
+  : super(HttpStatus.CONFLICT, _toMessage("Conflict", detail), data);
 }
 
 // 410 Gone
 class GoneException extends HttpException {
-  final int status = HttpStatus.GONE;
-  final String message = "Gone";
-  final Map<String, dynamic> data;
-  const GoneException([this.data]);
+  const GoneException([Map<String, dynamic> data,
+                          String detail = ""])
+  : super(HttpStatus.GONE, _toMessage("Gone", detail), data);
 }
 
 // 412 Precondition Failed
 class PreconditionFailedException extends HttpException {
-  final int status = HttpStatus.PRECONDITION_FAILED;
-  final String message = "Precondition Failed";
-  final Map<String, dynamic> data;
-  const PreconditionFailedException([this.data]);
+  const PreconditionFailedException([Map<String, dynamic> data,
+                      String detail = ""])
+  : super(HttpStatus.PRECONDITION_FAILED, _toMessage("Precondition Failed", detail), data);
 }
 
 // 415 Unsupported Media Type
 class UnsupportedMediaTypeException extends HttpException {
-  final int status = HttpStatus.UNSUPPORTED_MEDIA_TYPE;
-  final String message = "Unsupported Media Type";
-  final Map<String, dynamic> data;
-  const UnsupportedMediaTypeException([this.data]);
+  const UnsupportedMediaTypeException([Map<String, dynamic> data,
+                                    String detail = ""])
+  : super(HttpStatus.UNSUPPORTED_MEDIA_TYPE, _toMessage("Unsupported Media Type", detail),
+    data);
 }
 
 // 429 Too Many Requests
 class TooManyRequestsException extends HttpException {
-  final int status = 429;
-  final String message = "Too Many Requests";
-  final Map<String, dynamic> data;
-  const TooManyRequestsException([this.data]);
+  const TooManyRequestsException([Map<String, dynamic> data,
+                                    String detail = ""])
+  : super(429, _toMessage("Too Many Requests", detail), data);
 }
 
 // 501 Not Implemented
 class NotimplementedException extends HttpException {
-  final int status = HttpStatus.NOT_IMPLEMENTED;
-  final String message = "Not Implemented";
-  final Map<String, dynamic> data;
-  const NotimplementedException([this.data]);
+  const NotimplementedException([Map<String, dynamic> data,
+                                    String detail = ""])
+  : super(HttpStatus.NOT_IMPLEMENTED, _toMessage("Not Implemented", detail), data);
 }
 
 // 503 Service Unavailable
 class ServiceUnavailableException extends HttpException {
-  final int status = HttpStatus.SERVICE_UNAVAILABLE;
-  final String message = "Service Unavailable";
-  final Map<String, dynamic> data;
-  const ServiceUnavailableException([this.data]);
+  const ServiceUnavailableException([Map<String, dynamic> data,
+                                String detail = ""])
+  : super(HttpStatus.SERVICE_UNAVAILABLE, _toMessage("Service Unavailable", detail), data);
 }
+
+
+
+String _toMessage(String message, String detail) {
+  var part2 = detail != null ? ': $detail' : '';
+  return '${message}${part2}';
+}
+

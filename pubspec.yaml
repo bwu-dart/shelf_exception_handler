@@ -1,5 +1,5 @@
 name: shelf_exception_response
-version: 0.1.0
+version: 0.1.1
 description: Shelf middleware that provides the abillity to simply throw an HttpException that gets converted to an appropriate response code and a formatted response body dependent on the clients accept header.
 homepage: https://github.com/octobyte/shelf_exception_response
 author: Thomas Profelt <tom@octobyte.at>
