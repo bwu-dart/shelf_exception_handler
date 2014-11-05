@@ -58,7 +58,7 @@ void main() {
     .addMiddleware(exceptionResponse())
     .addHandler((shelf.Request request){
       // handler can now throw HttpException that is handled a formatted.
-      throw new NotFoundException({"something":["additional", 4, true]});
+      throw new NotFoundException({"something":["additional", 4, true]}, "This will show in the message");
     });
 
   io.serve(handler, 'localhost', 8080).then((server) {
@@ -70,7 +70,8 @@ void main() {
 ### Adding additional response data for the body ###
 Every HttpException can take a data parameter that accepts a `Map<String, dynamic> data` in the constructor that
 provides you with the ability to add custom data to the generated response. The fields status and message are always
-added to the response data but can be overridden by data. 
+added to the response data but can be overridden by data. The message field can now receive additional text which will 
+be appended to the HTTP Status Name (e.g.: Not Acceptable: Your text here) via the Exceptions details param.
 
 Please keep in mind that responses of type "text/plain" do currently not output any data other than status and message 
 (how should I format them anyhow ?). To add support for your own output format or change an existing one look at 
@@ -78,12 +79,13 @@ Please keep in mind that responses of type "text/plain" do currently not output 
 "Add your own response formatter".
 
 ```dart
-// adding custom data to response
+// adding custom data and error details to response
 throw new NotAcceptableException({
 	"validation_errors": {
 		"username": "to_long",
 		"password": "not_contains_special_characters"
-	}
+	},
+	"Validation failed"
 });
 ```
 
