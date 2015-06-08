@@ -1,7 +1,8 @@
+@TestOn('vm')
 library shelf_exception_handler.test;
 
 import 'dart:async';
-import 'package:unittest/unittest.dart';
+import 'package:test/test.dart';
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:http_exception/http_exception.dart';
 import 'package:shelf_exception_handler/shelf_exception_handler.dart';

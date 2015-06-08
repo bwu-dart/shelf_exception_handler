@@ -1,8 +1,8 @@
 # File set description: lists of patterns to include/exclude
 files:
   include:
-    - '**/lib/**'
     - '**/example/**'
+    - '**/lib/**'
     - '**/test/**'
     - '**/tool/**'
 #  exclude:

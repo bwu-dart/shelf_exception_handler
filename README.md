@@ -1,11 +1,17 @@
-## Shelf Exception Handler ##
+#Shelf Exception Handler
+
+[![Star this Repo](https://img.shields.io/github/stars/bwu-dart/shelf_exception_handler.svg?style=flat)](https://github.com/bwu-dart/shelf_exception_handler)
+[![Pub Package](https://img.shields.io/pub/v/shelf_exception_handler.svg?style=flat)](https://pub.dartlang.org/packages/shelf_exception_handler)
+[![Build Status](https://travis-ci.org/bwu-dart/shelf_exception_handler.svg?branch=travis)](https://travis-ci.org/bwu-dart/shelf_exception_handler)
+[![Coverage Status](https://coveralls.io/repos/bwu-dart/shelf_exception_handler/badge.svg)](https://coveralls.io/r/bwu-dart/shelf_exception_handler)
+
 [Shelf](http://pub.dartlang.org/packages/shelf) middleware for easily creating
 shelf.Responses by simply throwing an HttpException.
 
 This package is a fork of
 [shelf_exception_response](https://pub.dartlang.org/packages/shelf_exception_response).
 
-### What problem does it solve ###
+##What problem does it solve 
 When creating web service you have to handle a lot of http responses simply
 informing the client about a server-side error. Not all of those situations
 occur withing your request handlers but rather in some service classes or
@@ -51,7 +57,7 @@ be generated. The response will have a correct Http status (eg.: 403), and the
 response body will be encoded in an acceptable format (Json, Xml, Text) using
 [Tentacle Response Formatter](http://pub.dartlang.org/packages/tentacle_response_formatter).
 
-### Example ###
+##Example 
 ```dart
 import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf/shelf_io.dart' as io;
@@ -76,7 +82,7 @@ void main() {
 }
 ```
 
-### Adding additional response data for the body ###
+##Adding additional response data for the body
 Every HttpException can take a data parameter that accepts a
 `Map<String, dynamic> data` in the constructor that provides you with the
 ability to add custom data to the generated response. The fields status and
@@ -103,7 +109,7 @@ throw new NotAcceptableException({
 });
 ```
 
-### Add your own exception types ###
+##Add your own exception types
 There are already predefined exceptions for the most common Http error code
 available but you may find that there is a specific error code missing. In that
 case you can simply define your own HttpException type by extending or
@@ -119,5 +125,5 @@ class IamATeapotException extends HttpException {
 }
 ```
 
-### License ###
+##License
 Apache 2.0

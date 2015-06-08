@@ -6,8 +6,8 @@ description: >
   clients accept header.
 homepage: https://github.com/bwu-dart/shelf_exception_handler
 authors:
-  Günter Zöchbauer <guenter@gzoechbauer.com>
-  Thomas Profelt <tom@octobyte.at>
+- Günter Zöchbauer <guenter@gzoechbauer.com>
+- Thomas Profelt <tom@octobyte.at>
 environment:
   sdk: '>=1.0.0 <2.0.0'
 
@@ -17,7 +17,7 @@ dependencies:
   shelf_response_formatter: '>=0.1.0 <0.2.0'
 
 dev_dependencies:
-  analyzer: '>=0.24.0 <0.26.0'
-  grinder: '>=0.7.0-dev.1 <0.8.0'
-  linter: '>=0.0.2 <0.1.0'
-  unittest: '>=0.9.0 <0.13.0'
+  bwu_utils_dev: '>=0.1.0-dev.5 <0.2.0'
+  test: '>=0.12.0 <0.14.0'
+
+dependency_overrides:
