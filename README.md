@@ -2,8 +2,8 @@
 
 [![Star this Repo](https://img.shields.io/github/stars/bwu-dart/shelf_exception_handler.svg?style=flat)](https://github.com/bwu-dart/shelf_exception_handler)
 [![Pub Package](https://img.shields.io/pub/v/shelf_exception_handler.svg?style=flat)](https://pub.dartlang.org/packages/shelf_exception_handler)
-[![Build Status](https://travis-ci.org/bwu-dart/shelf_exception_handler.svg?branch=travis)](https://travis-ci.org/bwu-dart/shelf_exception_handler)
-[![Coverage Status](https://coveralls.io/repos/bwu-dart/shelf_exception_handler/badge.svg)](https://coveralls.io/r/bwu-dart/shelf_exception_handler)
+[![Build Status](https://travis-ci.org/bwu-dart/shelf_exception_handler.svg?branch=master)](https://travis-ci.org/bwu-dart/shelf_exception_handler)
+[![Coverage Status](https://coveralls.io/repos/bwu-dart/shelf_exception_handler/badge.svg?branch=master)](https://coveralls.io/r/bwu-dart/shelf_exception_handler)
 
 [Shelf](http://pub.dartlang.org/packages/shelf) middleware for easily creating
 shelf.Responses by simply throwing an HttpException.
