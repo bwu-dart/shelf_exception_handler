@@ -28,7 +28,7 @@ shelf.Middleware exceptionHandler() {
         FormatResult result = formatter.formatResponse(request, error.toMap());
         return new shelf.Response(error.status,
             body: result.body,
-            headers: {HttpHeaders.CONTENT_TYPE: result.contentType});
+            headers: {HttpHeaders.contentTypeHeader: result.contentType});
       }, test: (e) => e is HttpException);
     };
   };

@@ -30,7 +30,7 @@ void main() {
 
   test("ignores non HttpExceptions", () {
     var handler = mw((request) => throw new Exception());
-    expect(handler(defaultRequest), throws);
+    expect(handler(defaultRequest), throwsA(const TypeMatcher<Exception>()));
   });
 
   test("handles errors", () {

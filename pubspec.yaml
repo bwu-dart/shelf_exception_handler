@@ -1,5 +1,5 @@
 name: shelf_exception_handler
-version: 0.1.0
+version: 0.2.0
 description: >
   Shelf middleware to simply throw an HttpException that gets converted to an
   appropriate response code and a formatted response body dependent on the
@@ -9,15 +9,15 @@ authors:
 - Günter Zöchbauer <guenter@gzoechbauer.com>
 - Thomas Profelt <tom@octobyte.at>
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  shelf: '>=0.5.0+1 <0.7.0'
-  http_exception: '>=0.1.0 <0.2.0'
-  shelf_response_formatter: '>=0.1.0 <0.2.0'
+  shelf: '>=0.7.0 <0.8.0'
+  http_exception: '>=0.2.0 <0.3.0'
+  shelf_response_formatter: '>=0.2.0 <0.3.0'
 
 dev_dependencies:
-  bwu_utils_dev: '>=0.1.0-dev.5 <0.2.0'
-  test: '>=0.12.0 <0.14.0'
+  bwu_grinder_tasks: '>=0.2.0-dev.0 <0.3.0'
+  test: '>=1.0.0 <2.0.0'
 
 dependency_overrides:

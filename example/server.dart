@@ -7,7 +7,9 @@ void main() {
   var handler = const shelf.Pipeline()
       .addMiddleware(exceptionHandler())
       .addHandler((shelf.Request request) {
-    throw new NotFoundException({"something": ["additional", 4, true]});
+    throw new NotFoundException({
+      "something": ["additional", 4, true]
+    });
   });
 
   io.serve(handler, 'localhost', 8080).then((server) {
