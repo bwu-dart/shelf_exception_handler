@@ -8,61 +8,63 @@ import 'package:http_exception/http_exception.dart';
 import 'package:shelf_exception_handler/shelf_exception_handler.dart';
 
 void main() {
-  String baseUrl = "http://www.test.io";
+  const baseUrl = 'http://www.test.io';
 
   shelf.Request createShelfRequest(String method, String path) {
-    Uri uri = Uri.parse(baseUrl + path);
-    Map<String, String> headers = {'Accept': 'audio/*; q=0.2, audio/basic'};
-    return new shelf.Request(method, uri, headers: headers);
+    final uri = Uri.parse(baseUrl + path);
+    final headers = {'Accept': 'audio/*; q=0.2, audio/basic'};
+    return shelf.Request(method, uri, headers: headers);
   }
 
-  shelf.Request defaultRequest = createShelfRequest('GET', '/asdf/qwer');
+  final defaultRequest = createShelfRequest('GET', '/asdf/qwer');
 
-  shelf.Middleware mw = exceptionHandler();
+  final mw = exceptionHandler();
 
-  test("exceptionResponse returns middleware", () {
+  test('exceptionResponse returns middleware', () {
     expect(mw is shelf.Middleware, isTrue);
   });
 
-  test("middleware returns handler", () {
+  test('middleware returns handler', () {
     expect(mw((request) {}) is Function, isTrue);
   });
 
-  test("ignores non HttpExceptions", () {
-    var handler = mw((request) => throw new Exception());
+  test('ignores non HttpExceptions', () {
+    final handler = mw((request) => throw Exception());
     expect(handler(defaultRequest), throwsA(const TypeMatcher<Exception>()));
   });
 
-  test("handles errors", () {
-    var handler = mw((request) => throw new HttpException());
+  test('handles errors', () {
+    final handler = mw((request) => throw const HttpException());
     expect(handler(defaultRequest) is Future, isTrue);
   });
 
-  test("resolves normal response", () {
-    var handler = mw((request) => new shelf.Response.ok("asdf"));
+  test('resolves normal response', () {
+    final handler = mw((request) => shelf.Response.ok('asdf'));
     expect(handler(defaultRequest), completes);
   });
 
-  test("handles HttpExceptions", () {
-    var handler = mw((request) => throw new HttpException());
+  test('handles HttpExceptions', () {
+    final handler = mw((request) => throw const HttpException());
     expect(handler(defaultRequest), completes);
   });
 
-  test("returns default 500", () {
-    var handler = mw((request) => throw new HttpException());
+  test('returns default 500', () {
+    final handler = mw((request) => throw const HttpException());
     expect(handler(defaultRequest),
-        completion(predicate((r) => r.statusCode == 500)));
+        completion(predicate<shelf.Response>((r) => r.statusCode == 500)));
   });
 
-  test("returns correct 404", () {
-    var handler = mw((request) => throw new HttpException(404, "Not found"));
+  test('returns correct 404', () {
+    final handler =
+        mw((request) => throw const HttpException(404, 'Not found'));
     expect(handler(defaultRequest),
-        completion(predicate((r) => r.statusCode == 404)));
+        completion(predicate<shelf.Response>((r) => r.statusCode == 404)));
   });
 
-  test("returns correct 301", () {
-    var handler = mw((request) => throw new HttpException(301, "Forbidden"));
+  test('returns correct 301', () {
+    final handler =
+        mw((request) => throw const HttpException(301, 'Forbidden'));
     expect(handler(defaultRequest),
-        completion(predicate((r) => r.statusCode == 301)));
+        completion(predicate<shelf.Response>((r) => r.statusCode == 301)));
   });
 }
