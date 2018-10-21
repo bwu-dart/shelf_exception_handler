@@ -1,16 +1,18 @@
 library shelf_exception_handler;
 
-import 'dart:io' show HttpHeaders;
 import 'dart:async';
-import 'package:shelf/shelf.dart' as shelf;
+import 'dart:io' show HttpHeaders;
+
 import 'package:http_exception/http_exception.dart';
-export 'package:shelf_exception_handler/shelf_exception_handler.dart';
+import 'package:shelf/shelf.dart' as shelf;
 import 'package:shelf_response_formatter/shelf_response_formatter.dart';
 
-ResponseFormatter formatter = new ResponseFormatter();
+export 'package:shelf_exception_handler/shelf_exception_handler.dart';
 
-/// A middleware that allows handlers to simply throw [HttpExceptions]
-/// instead of having to create and return a non successful [Response].
+ResponseFormatter formatter = ResponseFormatter();
+
+/// A middleware that allows handlers to simply throw [HttpException]s
+/// instead of having to create and return a non successful [shelf.Response].
 ///
 /// Example:
 /// (request) {
@@ -19,17 +21,16 @@ ResponseFormatter formatter = new ResponseFormatter();
 ///    }
 ///    return new Response();
 /// }
-shelf.Middleware exceptionHandler() {
-  return (shelf.Handler handler) {
-    return (shelf.Request request) {
-      return new Future.sync(() => handler(request))
-          .then((response) => response)
-          .catchError((error, stackTrace) {
-        FormatResult result = formatter.formatResponse(request, error.toMap());
-        return new shelf.Response(error.status,
-            body: result.body,
-            headers: {HttpHeaders.contentTypeHeader: result.contentType});
-      }, test: (e) => e is HttpException);
-    };
-  };
-}
+// ignore: avoid_types_on_closure_parameters
+shelf.Middleware exceptionHandler() => (shelf.Handler handler) =>
+// ignore: avoid_types_on_closure_parameters
+    (shelf.Request request) =>
+        Future.sync(() => handler(request)).then((response) => response)
+            // ignore: avoid_types_on_closure_parameters
+            .catchError((Object error, StackTrace stackTrace) {
+          final result = formatter.formatResponse(
+              request, (error as HttpException).toMap());
+          return shelf.Response((error as HttpException).status,
+              body: result.body,
+              headers: {HttpHeaders.contentTypeHeader: result.contentType});
+        }, test: (e) => e is HttpException);
